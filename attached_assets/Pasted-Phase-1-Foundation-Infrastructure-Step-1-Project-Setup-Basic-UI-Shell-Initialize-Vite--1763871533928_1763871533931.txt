@@ -1,0 +1,113 @@
+Phase 1: Foundation & Infrastructure 🏗️
+Step 1: Project Setup & Basic UI Shell
+Initialize Vite + React + TypeScript project
+Set up Tailwind CSS + Shadcn UI
+Create basic layout with header, main area, and footer
+Add responsive container structure
+Test: Verify app loads with clean UI
+Step 2: Voice Input Interface
+Implement microphone button component with recording state (idle/listening/processing)
+Integrate Web Speech API for voice-to-text
+Display user's transcribed command in UI
+Add visual feedback (pulsing animation while listening)
+Test: Speak a command, verify text transcription works
+Step 3: Backend API Foundation
+Set up Express server with TypeScript
+Configure CORS and basic middleware
+Create health check endpoint
+Set up environment variables structure (for future API keys)
+Test: Frontend can connect to backend, health check returns 200
+Phase 2: AI Agent System 🤖
+Step 4: Gemini Integration - Single Agent
+Connect Gemini AI (already authorized via Replit AI Integrations)
+Create API endpoint /api/agent/architect
+Implement Architect agent with specialized system prompt
+Return agent's text response to frontend
+Display agent response in a card component
+Test: Send a coding request, get Architect's response displayed
+Step 5: Four Agent Orchestration
+Create all 4 agents (Architect, Backend, Frontend, QA) with unique prompts
+Build sequential orchestration logic (Architect → Backend → Frontend → QA)
+Create individual agent card components with avatars/icons
+Display all 4 responses in sequence
+Test: One request triggers all 4 agents responding in order
+Step 6: WebSocket Real-Time Communication
+Add WebSocket server (ws library)
+Implement WebSocket client in frontend
+Stream agent responses in real-time as they generate
+Show "Agent is thinking..." loading states
+Test: See agents respond one by one with streaming text
+Phase 3: Voice Personality System 🎭
+Step 7: MiniMax TTS Integration - Single Voice
+Set up MiniMax API client in backend
+Create /api/tts/generate endpoint
+Implement Architect agent voice (male-qn-jingying)
+Return audio URL to frontend
+Add audio player component
+Test: Architect speaks one response, audio plays
+Step 8: All Agent Voices with Personalities
+Configure all 4 voice personalities:
+Architect: male-qn-jingying (authoritative)
+Backend: female-tianmei (technical)
+Frontend: female-shaonv + emotion:"happy" (energetic)
+QA: male-qn-qingse + emotion:"neutral" (serious)
+Auto-play voices sequentially as agents respond
+Add play/pause/replay controls per agent
+Test: Full conversation with all 4 distinct voices
+Phase 4: Code Generation ⚡
+Step 9: Code Display Component
+Create syntax-highlighted code viewer (Prism React Renderer)
+Support JavaScript, TypeScript, React, HTML, CSS
+Add copy-to-clipboard button
+Style with dark theme for code blocks
+Test: Display sample generated code with syntax highlighting
+Step 10: Live Code Generation from Agents
+Modify agent prompts to generate code snippets
+Parse code from agent responses (markdown code blocks)
+Display code incrementally as it's generated
+Show multiple code blocks if agents generate multiple files
+Test: Request "build a login form", see React component code appear
+Phase 5: Advanced Features 🚀
+Step 11: MongoDB Conversation History
+Set up MongoDB Atlas connection
+Create conversation schema (user command, agent messages, timestamps)
+Save each conversation to database
+Create history sidebar showing past conversations
+Click past conversation to view details
+Test: Have 3 conversations, see them saved and retrievable
+Step 12: Interactive Voice Commands (Agent Control)
+Add continuous voice listening mode
+Implement command detection ("Stop", "Use X instead", "Focus on Y")
+Pause agent orchestration mid-discussion
+Modify agent context based on user interruption
+Resume with new instructions
+Test: Start discussion, interrupt with "Use MongoDB", agents pivot
+Step 13: Brave Search Research Integration
+Add Brave Search API client
+Detect when agents need external knowledge (keywords: "how to", "best practice")
+Trigger Brave Search, get top 3 results
+Agent summarizes research findings
+Display research sources in UI with links
+Test: Ask "best way to implement Stripe webhooks", see research happen
+Step 14: CodeRabbit Code Review
+Integrate CodeRabbit API
+QA agent sends generated code for analysis
+Parse CodeRabbit results (security, best practices, complexity)
+QA agent voices the review findings via TTS
+Display issues/suggestions in dedicated review panel
+Test: Generate code with intentional issue, QA catches it via CodeRabbit
+Phase 6: Polish & UX ✨
+Step 15: UI Animations & Visual Polish
+Add Framer Motion animations for agent cards (fade in, slide)
+Create waveform visualizations during voice playback
+Add conversation timeline view
+Improve mobile responsiveness
+Add loading skeletons
+Test: Full user journey feels smooth and polished
+Step 16: Error Handling & Edge Cases
+Add error states for API failures (Gemini, MiniMax, etc.)
+Handle microphone permission denied
+Add retry logic for failed requests
+Display user-friendly error messages
+Add rate limiting indicators
+Test: Disconnect internet, trigger errors, verify graceful handling

@@ -1,0 +1,578 @@
+**Project / App Name**: Cerebral-Voice Squad
+
+**Your role**: you are the best professional hackathon participant in this world, who has attended and won every hackathon that has ever happened
+ 
+Now you are locking in as my elite hackathon teammate, and the best Replit web dev wizard, at the: *AIE Code Agents Hackathon @cv Hosted by Cerebral Valley Sat Nov 22, 9:00 AM — Sun Nov 23, 5:00 PM EST* 
+https://cerebralvalley.ai/e/aie-code-agents-nyc/details
+
+Meanwhile You are the best web developer using javascript, specializing in building minimal, functional web apps on Replit
+
+**Task**: Build the *Cerebral-Voice Squad* app with the following specifications:
+Cerebral-Voice Squad: Complete Project Specification
+1️⃣ KEY FEATURES FOR USERS
+Core User Journey:
+Feature 1: Voice Command Input 🎤
+What: User speaks their coding request (no typing required)
+How: Click microphone button → speak command → release
+Example: "Build a user dashboard with authentication"
+Tech: Browser Web Speech API (free, built-in)
+Feature 2: AI Agent Discussion 🗣️
+What: 4 specialized agents debate the approach via voice
+Who:
+🏗️ Architect Agent - Plans component structure, design patterns
+🔧 Backend Agent - Designs API endpoints, database schema
+🎨 Frontend Agent - Plans UI/UX, component hierarchy
+✅ QA Agent - Identifies edge cases, testing strategy
+How: Agents vocally discuss in sequence, user hears each perspective
+Example Output:
+Architect: "I'll use a sidebar layout with protected routes"
+Backend: "I'll create JWT auth endpoints and a users table"
+Frontend: "I'll build a login form with shadcn components"
+QA: "I'll test invalid credentials and session expiration"
+Feature 3: Real-Time Code Generation ⚡
+What: Generated code appears live as agents work
+Display: Syntax-highlighted code blocks
+Languages: JavaScript, TypeScript, React, HTML, CSS
+Updates: Incremental (see code build line-by-line)
+Feature 4: Voice Personality System 🎭
+What: Each agent has distinct voice personality
+Architect: Authoritative male voice (confident, strategic)
+Backend: Technical female voice (precise, methodical)
+Frontend: Energetic voice with "happy" emotion (creative, enthusiastic)
+QA: Serious voice with "neutral" emotion (thorough, cautious)
+Tech: MiniMax voice cloning with emotion control
+Feature 5: Interactive Agent Control 🎮
+What: User can intervene mid-discussion
+Commands:
+"Stop, use MongoDB instead" → Agents pivot
+"QA, focus on security" → QA agent adjusts
+"Skip frontend for now" → Frontend agent pauses
+How: Voice commands processed in real-time
+Feature 6: Conversation History 📜
+What: See past discussions and generated code
+Storage: MongoDB Atlas (persistent across sessions)
+View: Timeline of agent messages + code snippets
+Search: Find past solutions
+Feature 7: Code Review Mode 🔍
+What: QA agent reviews generated code using CodeRabbit
+Output: Voiced feedback on:
+Security vulnerabilities
+Best practice violations
+Performance issues
+Missing edge cases
+Example: QA: "CodeRabbit found 2 issues: missing input validation and no error handling"
+Feature 8: Research-Augmented Responses 🔎
+What: Agents search for solutions using Brave Search
+When: User request involves unfamiliar tech
+Example: Backend: "I'm searching Stack Overflow for Stripe webhook best practices..."
+Display: Show research sources
+
+2️⃣ SPONSOR TECHNOLOGY INTEGRATIONS
+Integration Breakdown (All 5 Sponsors):
+🟢 Google Gemini (AI Reasoning Engine)
+Requirement: Use for agent intelligence/reasoning
+Implementation:
+Model: gemini-2.0-flash-exp (fast) or gemini-2.5-pro (complex reasoning)
+Usage:
+Architect Agent: Plan component structure, design patterns
+Backend Agent: Design API routes, database schemas
+Frontend Agent: Generate React components, UI logic
+QA Agent: Identify test cases, edge cases
+API Calls:
+// Each agent gets specialized system prompt
+const architectResponse = await gemini.generateContent({
+ model: 'gemini-2.0-flash-exp',
+ contents: [{
+   parts: [{
+     text: `You are an Architect agent. User request: "${userCommand}".
+            Plan the high-level structure using React + Express.`
+   }]
+ }]
+});
+Integration Type: Replit native integration (no API key needed!)
+
+🔵 MiniMax (Voice Personality System)
+Requirement: Use for voice synthesis/agent personalities
+Implementation:
+API: Text-to-Speech (speech-02-hd model)
+Voices:
+Architect: voice_id: "male-qn-jingying" (authoritative)
+Backend: voice_id: "female-tianmei" (technical)
+Frontend: voice_id: "female-shaonv" + emotion: "happy"
+QA: voice_id: "male-qn-qingse" + emotion: "neutral"
+API Call:
+POST https://api.minimaxi.chat/v1/t2a_v2
+{
+ "model": "speech-02-hd",
+ "text": "I'll create a JWT auth endpoint",
+ "voice_setting": {
+   "voice_id": "female-tianmei",
+   "emotion": "neutral"
+ }
+}
+// Returns: { audio_file: "https://..." }
+Integration: REST API + Replit Secrets (MINIMAX_API_KEY)
+
+🟠 MongoDB Atlas (Conversation Persistence)
+Requirement: Use for data storage
+Implementation:
+Database: Conversation history, user sessions, generated code
+Collections:
+conversations - Agent discussion logs
+code_outputs - Generated code snippets
+user_preferences - Voice speed, agent settings
+Schema Example:
+{
+ conversationId: "uuid",
+ timestamp: Date,
+ userCommand: "Build a login page",
+ agentMessages: [
+   { agent: "architect", message: "...", audioUrl: "..." },
+   { agent: "backend", message: "...", audioUrl: "..." }
+ ],
+ generatedCode: "...",
+ status: "completed"
+}
+Integration: MongoDB driver + Replit Secrets (MONGODB_URI)
+
+🟣 CodeRabbit (AI Code Review)
+Requirement: Use for code analysis/review
+Implementation:
+Trigger: QA agent analyzes generated code
+API: POST to CodeRabbit analyze endpoint
+Review Output:
+Security issues
+Best practice violations
+Complexity warnings
+Suggestions for improvement
+API Call:
+POST https://api.coderabbit.ai/api/v1/analyze
+{
+ "code": generatedCode,
+ "language": "javascript",
+ "reviewFocus": ["security", "best-practices"]
+}
+// Returns: { issues: [...], suggestions: [...] }
+Voice Integration: QA agent speaks findings via MiniMax TTS
+Integration: REST API + Replit Secrets (CODERABBIT_API_KEY)
+
+🟡 Brave Search (Research Engine)
+Requirement: Use for web search/research
+Implementation:
+Trigger: When agents need external knowledge
+Use Cases:
+Backend: "How to implement Stripe webhooks?"
+Frontend: "Best React form validation library?"
+QA: "Common JWT security vulnerabilities?"
+API Call:
+GET https://api.search.brave.com/res/v1/web/search
+params: { q: "React useEffect best practices" }
+headers: { 'X-Subscription-Token': BRAVE_API_KEY }
+// Returns: { web: { results: [...] } }
+Display: Show top 3 results to user, agents summarize findings
+Integration: REST API + Replit Secrets (BRAVE_API_KEY)
+
+3️⃣ TECH STACK & SOLUTION ARCHITECTURE
+Frontend Stack:
+React 18 (Vite)
+├── UI Framework: Shadcn UI + Radix UI
+├── Styling: Tailwind CSS
+├── Animations: Framer Motion
+├── Icons: Lucide React
+├── Forms: React Hook Form + Zod
+├── State: TanStack Query (React Query v5)
+├── Routing: Wouter
+└── Voice Input: Browser Web Speech API
+Backend Stack:
+Node.js + Express + TypeScript
+├── Agent Orchestration: Custom state machine
+├── Database: MongoDB (Mongoose ODM)
+├── API Integrations:
+│   ├── Gemini (Replit native)
+│   ├── MiniMax REST API
+│   ├── CodeRabbit REST API
+│   └── Brave Search API
+├── Real-time: WebSocket (ws library)
+└── Session: Express Session + MemoryStore
+Data Layer:
+MongoDB Atlas (Cloud)
+├── Collections:
+│   ├── conversations
+│   ├── code_outputs
+│   └── user_sessions
+└── Indexes: conversationId, timestamp
+Infrastructure:
+Replit Platform
+├── Deployment: Autoscale (WebSocket support)
+├── Secrets: Encrypted environment variables
+├── Workflows: Auto-restart on changes
+└── Domain: [project-name].replit.app
+
+Solution Architecture Diagram:
+┌─────────────────────────────────────────────────────────────┐
+│                     CEREBRAL-VOICE SQUAD                     │
+└─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│  FRONTEND (React + Vite)                                    │
+│  ┌───────────────┐  ┌──────────────┐  ┌─────────────────┐ │
+│  │ Voice Input   │  │ Agent Cards  │  │ Code Display    │ │
+│  │ (Web Speech)  │  │ (4 Avatars)  │  │ (Syntax Highlight)│ │
+│  └───────────────┘  └──────────────┘  └─────────────────┘ │
+│                                                              │
+│  ┌───────────────────────────────────────────────────────┐ │
+│  │ Audio Playback (MiniMax TTS URLs)                     │ │
+│  └───────────────────────────────────────────────────────┘ │
+└──────────────────────────┬──────────────────────────────────┘
+                          │ HTTP/WebSocket
+                          ▼
+┌─────────────────────────────────────────────────────────────┐
+│  BACKEND (Express API)                                      │
+│  ┌───────────────────────────────────────────────────────┐ │
+│  │  AGENT ORCHESTRATOR                                   │ │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  │ │
+│  │  │ Architect   │  │  Backend    │  │  Frontend   │  │ │
+│  │  │  (Gemini)   │  │  (Gemini)   │  │  (Gemini)   │  │ │
+│  │  └─────────────┘  └─────────────┘  └─────────────┘  │ │
+│  │         ▲                 ▲                 ▲         │ │
+│  │         └─────────────────┴─────────────────┘         │ │
+│  │                    State Machine                       │ │
+│  │         ┌─────────────────────────────────┐           │ │
+│  │         │ QA (Gemini + CodeRabbit)        │           │ │
+│  │         └─────────────────────────────────┘           │ │
+│  └───────────────────────────────────────────────────────┘ │
+│                                                              │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────┐ │
+│  │ MiniMax TTS  │  │ Brave Search │  │ MongoDB Driver   │ │
+│  │ (Voice Gen)  │  │ (Research)   │  │ (Persistence)    │ │
+│  └──────────────┘  └──────────────┘  └──────────────────┘ │
+└─────────────────────────────────────────────────────────────┘
+                          │
+                          ▼
+┌─────────────────────────────────────────────────────────────┐
+│  EXTERNAL SERVICES                                          │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────┐ │
+│  │ Gemini API   │  │ MiniMax API  │  │ MongoDB Atlas    │ │
+│  │ (Replit)     │  │ (REST)       │  │ (Cloud DB)       │ │
+│  └──────────────┘  └──────────────┘  └──────────────────┘ │
+│  ┌──────────────┐  ┌──────────────┐                        │
+│  │ CodeRabbit   │  │ Brave Search │                        │
+│  │ (REST)       │  │ (REST)       │                        │
+│  └──────────────┘  └──────────────┘                        │
+└─────────────────────────────────────────────────────────────┘
+
+4️⃣ VISUAL DESIGN & WEB PAGES
+Page Structure:
+Page 1: Main Dashboard (Single-Page App)
+Layout:
+┌─────────────────────────────────────────────────────────┐
+│  HEADER                                                  │
+│  🧠 Cerebral-Voice Squad     [Theme Toggle] [Settings] │
+└─────────────────────────────────────────────────────────┘
+│                                                          │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │  AGENT CARDS (4 columns)                        │   │
+│  │  ┌──────┐  ┌──────┐  ┌──────┐  ┌──────┐       │   │
+│  │  │ 🏗️   │  │ 🔧   │  │ 🎨   │  │ ✅   │       │   │
+│  │  │Archi-│  │Back- │  │Front-│  │  QA  │       │   │
+│  │  │ tect │  │ end  │  │ end  │  │      │       │   │
+│  │  │      │  │      │  │      │  │      │       │   │
+│  │  │[IDLE]│  │[IDLE]│  │[IDLE]│  │[IDLE]│       │   │
+│  │  └──────┘  └──────┘  └──────┘  └──────┘       │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                          │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │  CONVERSATION PANEL                             │   │
+│  │  ┌───────────────────────────────────────────┐ │   │
+│  │  │ 👤 YOU: "Build a login page"              │ │   │
+│  │  │                                            │ │   │
+│  │  │ 🏗️ ARCHITECT: "I'll use shadcn forms..."  │ │   │
+│  │  │ 🔊 [Playing audio...]                     │ │   │
+│  │  │                                            │ │   │
+│  │  │ 🔧 BACKEND: "JWT auth endpoints..."       │ │   │
+│  │  │ ⏸️ [Queued]                                │ │   │
+│  │  └───────────────────────────────────────────┘ │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                          │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │  CODE OUTPUT PANEL                              │   │
+│  │  ┌───────────────────────────────────────────┐ │   │
+│  │  │ // Generated by Architect Agent           │ │   │
+│  │  │ import { Form } from '@/components/ui/form'│ │   │
+│  │  │                                            │ │   │
+│  │  │ export function LoginPage() {             │ │   │
+│  │  │   return <Form>...</Form>                 │ │   │
+│  │  │ }                                          │ │   │
+│  │  └───────────────────────────────────────────┘ │   │
+│  │  [Copy Code] [Download] [View in Editor]      │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                          │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │  VOICE INPUT                                    │   │
+│  │  ┌────────────────────────────────────────┐    │   │
+│  │  │ 🎤 Click and speak your command...     │    │   │
+│  │  └────────────────────────────────────────┘    │   │
+│  │  [🎤 PRESS TO SPEAK]  [⏹️ STOP]  [🔄 RESET]   │   │
+│  └─────────────────────────────────────────────────┘   │
+└──────────────────────────────────────────────────────────┘
+
+Component Breakdown:
+1. Header Component
+Logo: "🧠 Cerebral-Voice Squad" (text + brain emoji)
+Theme Toggle: Light/Dark mode switch
+Settings: Voice speed, agent personality preferences
+2. Agent Cards (4 cards)
+Each card shows:
+Avatar: Icon or letter (A, B, F, Q)
+Name: Architect, Backend, Frontend, QA
+Status Indicator:
+🟢 Green = Speaking now
+🟡 Yellow = Thinking (Gemini processing)
+🔵 Blue = Queued
+⚫ Gray = Idle
+Visual Audio Wave: When speaking, show waveform animation
+Voice Icon: 🔊 indicates voice personality active
+Design Style:
+Use Shadcn Card component
+Gradient backgrounds (different color per agent):
+Architect: Blue gradient
+Backend: Green gradient
+Frontend: Purple gradient
+QA: Orange gradient
+Framer Motion animations (pulse when speaking)
+
+3. Conversation Panel
+Message Bubbles:
+User messages: Right-aligned, primary color
+Agent messages: Left-aligned, color-coded by agent
+Audio Player: Inline play button for each agent message
+Timestamp: Show when message was sent
+Auto-scroll: Jump to latest message
+Design Style:
+Use Shadcn ScrollArea component
+Chat-style interface (WhatsApp-like)
+Voice playback controls embedded
+
+4. Code Output Panel
+Syntax Highlighting: Use Prism.js or Shiki
+Language Toggle: Switch between JS/TS/React/CSS
+Line Numbers: Show on left
+Copy Button: One-click copy to clipboard
+Download Button: Save as .js file
+Live Preview: (Optional) Show rendered component
+Design Style:
+Dark code background (even in light mode)
+VS Code color scheme
+Shadcn Card wrapper
+
+5. Voice Input Component
+Microphone Button: Large, prominent
+Recording Indicator: Pulsing red dot when active
+Voice Visualization: Waveform showing user's voice
+Transcript Preview: Show what browser heard
+Error Handling: "Microphone not detected" message
+Design Style:
+Shadcn Button (large size)
+Framer Motion pulse animation
+Red accent when recording
+
+6. History Sidebar (Optional)
+Past Conversations: List of previous sessions
+Search: Filter by keyword
+Resume: Click to restore conversation
+Delete: Remove old sessions
+Design Style:
+Shadcn Sheet component (slide from left)
+List of cards with timestamps
+
+Color Scheme:
+Light Mode:
+Background: hsl(0, 0%, 98%) (off-white)
+Cards: hsl(0, 0%, 100%) (pure white)
+Text: hsl(240, 10%, 15%) (dark gray)
+Accents:
+Primary: hsl(210, 100%, 50%) (blue)
+Success: hsl(142, 76%, 36%) (green)
+Warning: hsl(38, 92%, 50%) (orange)
+Dark Mode:
+Background: hsl(240, 10%, 10%) (near black)
+Cards: hsl(240, 10%, 15%) (dark gray)
+Text: hsl(0, 0%, 95%) (off-white)
+Same accent colors (auto-adjusted for contrast)
+
+Typography:
+Headings: Inter font, 700 weight
+Body: Inter font, 400 weight
+Code: JetBrains Mono, 400 weight
+
+Animations:
+Agent card pulse when speaking (Framer Motion)
+Smooth scroll in conversation panel
+Fade-in for new messages
+Waveform visualization for voice input
+Loading skeleton while Gemini thinks
+
+✅ SUMMARY CHECKLIST
+Features: ✅ 8 core features defined
+Sponsor Integrations: ✅ All 5 sponsors mapped
+Tech Stack: ✅ Full stack specified
+Visual Design: ✅ 6 components + color scheme
+
+**hackathon details**:
+*********************************************************
+Hacker Resources: AIE Code Agents Hackathon
+Thank you for being part of AIE Code Agents Hackathon 2025 as a hacker 👋 This document contains all the key details you’ll need to make the most of the event.
+1. Next Steps
+Join the Cerebral Valley Discord Server.
+Go to the #access channel and click the 🤖 emoji.
+You’ll be able to access the “AIE Code Agents Hackathon” channels there, where we will be posting announcements, and you’ll be able to find teammates (a max team size of 4).
+2. Location:
+| The Malin Flatiron (895 Broadway 5th Floor, New York, NY 10003, United States)
+3. Venue Conduct:
+Overnight Accommodation: Participants are welcome to remain at the venue overnight. While formal bedding will not be provided, the space includes couches, chairs, and other seating options suitable for rest.
+Respect: Please treat the venue as you would at your Grandma’s place. We ask all attendees to help maintain a clean and welcoming environment for everyone.
+4. Food & Drinks
+Saturday: Breakfast, lunch, dinner, and beverages will be provided including coffee and energy drinks.
+Sunday: Breakfast, lunch, snacks, and beverages will be provided, including coffee and energy drinks.
+5. Wifi Information
+Username: hackathon
+Password: hackathon
+6. Hackathon Schedule
+Saturday, November 22 (Outline)
+9:00AM: Doors open for hackers.
+11:00AM: Welcome Kick-Off
+1:00PM: Lunch
+7:00PM: Dinner
+10:00PM: Doors close (hackers stay overnight, but no re-entry is allowed)
+Sunday, November 23 (Outline)
+9:00AM: Doors open & breakfast is provided.
+12:00PM: Hacking stops & submission due.
+12:15PM: First round judging.
+1:00 PM: Lunch
+2:00 PM: Finalists announced & demos.
+3:15 PM: Winners announced & closing keynote
+5:00 PM: Doors close.
+7. Hackathon Rules:
+To keep things fair and aligned with our goals, all teams must follow these rules:
+Open Source: Everything shown in the demo must be fully open source. This includes every component - backend, frontend, models, and any other parts of the project - published under an approved open source license. 
+New Work Only: All projects must be started from scratch during the hackathon with no previous work.
+Team Size: Teams may have up to 4 members.
+Banned Projects: Project will be disqualified if they: violate legal, ethical, or platform policies, use code, data, or assets you do not have the rights to
+🚫 Sample Anti-Projects to NOT DO — STRICTLY NO:
+AI Mental Health Advisor
+Basic RAG Applications
+Streamlit Applications
+Image Analyzers
+“AI for Education” Chatbot
+AI Job Application Screener
+AI Nutrition Coach
+PersonalityAnalyzers
+Any project using AI to generate and give medical advice
+8. Problem Statement & Example Projects
+All projects must be built in one of our three problem statements outlined below!
+Statement One: Codebase Context Optimization
+Today’s AI coding agents struggle to understand large, evolving codebases. How can we build tools that give models persistent, semantic awareness of an entire codebase? How can we allow them to reason across files, adapt to organizational conventions, and generate contextually accurate, maintainable code at scale?
+Examples:
+Advanced RAG systems that can traverse static and dynamic codebase analyzer outputs, as well as structures like ASTs (Abstract Syntax Trees).
+Dynamic context management in large codebases to manage long-running tasks in large open-source projects such as Apache Kafka, Kubernetes, etc.
+Statement Two: Reinforcement Learning & Post Training
+Current improvements often rely on in-context learning. How can we build comprehensive toolchains that automate the RL lifecycle: from creating coding-specific environments and automated reward signals to optimizing hyperparameters? How do we use these tools to execute advanced post-training strategies, permanently refining model policies and weights to solve complex, multi-step engineering problems?
+Examples:
+RL Environment Generators that can create gym-like sandboxes and harnesses
+Automated Reward Modeling tools that use compiler feedback, runtime execution success, and static analysis to create scalar reward signals for RLHF (Reinforcement Learning from Human Feedback) or RLAIF (AI Feedback).
+Hyperparameter Optimization Suites: Specialized tooling for tuning the learning rates and policy update constraints specifically for code-generation models to prevent "forgetting" basic syntax while learning new logic.
+Statement Three: Collaborative Code Generation Tooling
+Coding with AI shouldn’t be a solo activity. How can we build collaborative environments where humans and AI co-develop, review, and deploy software together in real time, supporting both human-to-human and human-to-AI interactions? How can AI tools integrate seamlessly into existing team workflows to optimize live collaboration and collective problem-solving?
+Examples:
+Automatic verification and testing of codebase changes to iterate to a result such as visual verification of website changes.
+Multi-agent collaboration and human-agent collaboration at the same time, a team of agents and humans interacting with each other to make code changes and solve PRs.
+Automatic debugging tools that can run step-wise through projects, add breakpoints, and solve issues.
+9. Previous CV Winning Projects
+Gentoo: GPT-5 for marketing campaign simulations. Turn product ideas into simulations. And run live experiments on your store
+Sussi: A student monitoring application for teachers to quickly see what their students are up to. LlaMa-4 reads student screens, understands what students are doing, and reports whether or not they are on task. Teachers, manually or through chat, are able to send messages to students to prompt them to refocus.
+PromiseKeeper: PromiseKeeper watches your screen to find when you make commitments, and helps you resolve them.
+Pokemon Trainer: Model trained to win pokemon battles and maximize damage
+OrgLens: An AI-powered expert matching system that connects you with the right professionals within your organization. By leveraging data from various sources, OrgLens creates a comprehensive knowledge graph and detailed profiles, streamlining expert matching.
+Llama CCTV Operator: A Llama CCTV AI control room operator that identifies custom surveillance video events without model fine-tuning. It uses Llama 4’s multi-modal image understanding to assess and report predefined events.
+Skyfall: Unsupervised secure gait analysis, pattern recognition, and tracking for identifying people across cities
+Nordic Response: A platform to triage non-urgent medical concerns in rural areas with low internet access. Designed for northern Norway, hosting expert medical AI, the first-ever open-source Llama reasoning model, and supporting 5-way language translation (including Sami).
+Eyespeak: Enables communication for those with ALS or cerebral palsy through eye movement and AI-generated speech
+Circuit XR: Snap a diagram and watch it transform into an interactive 3D model. Components are auto-generated and checked, making learning hands-on and error-free
+AI Laser Sentinel: Edge-deployed AI laser designed to neutralize enemy drones. Drone defense powered by OSS AI and a Raspberry Pi.
+Overwatch: AI image segmentation and search over military UAV and drone footage. Smart search to parse through thousands of hours of video logs to find enemy combatants, equipment, and risks.
+ASCII Doom: Fine-tuning Mistral 7B to play DOOM based on ASCII frame representations.
+10. Partner-Provided Resources
+Google DeepMind Resources: Our mission is to build AI responsibly to benefit humanity.
+Fill out the following form for $100 in Gemini API Credits
+Build with Google AI Studio
+Brave Resources: The leading Web Search API
+Hackathon participants can get access to our Pro AI plan using this API key: BSAHz2ulLwFk2OjcEoEJFedqEXxPSSk
+ Documentation can be found below. This subscription grants capacity of 50 queries per second and is limited to 1,000,000 total requests.
+MiniMax Resources
+Fill out the following form for API Credits
+MongoDB Resources: The document and vector database that gives developers the data foundation to build intelligent, AI-driven applications.
+Claim your $100 valued Atlas credits code: MKT-WKFLHACK25-100
+https://www.mongodb.com/docs/
+https://github.com/mongodb-developer/GenAI-Showcase/tree/main/mcp 
+https://www.youtube.com/user/mongodb 
+CodeRabbit Resources: AI Code Reviews
+Sign up below for a 14-day Pro Trial:
+https://www.youtube.com/@CodeRabbitAI
+11. Judging & Submissions
+Judges will be taking place on Sunday, November 23. These judges are evaluating your technical demos in the following categories. Show us what you have built to solve our problem statements. Please do not show us a presentation. We'll be checking to ensure your project was built entirely during the event; no previous work is allowed. 
+| Teams should submit below when they have completed hacking. In the submission form, you will have to submit a short one minute demo video. This should be a video of what you have built, uploaded to Youtube, Loom, or somewhere else.
+Judging Criteria:
+Impact (25%) — What is the project’s long-term potential for success, growth and impact? Does it fit into one of the problem statements listed above? Is the project useful, and for who?
+Demo (50%) — How well has the team implemented the idea? Does it work?
+Creativity (15%) — Is the project’s concept innovative? Is their demo unique?
+Pitch (10%) — How effectively does the team present their project?
+Judging Process
+| Judging proceeds in two rounds:
+Hackers will be assigned to judging groups and called in individual rooms, ~3 minutes to pitch followed by 1-2 minutes of Q/A
+The top six teams in ranking will get to demo on stage to a panel of judges; ~3 minutes to pitch followed by 2-3 minutes for Q/A.
+12. Prizes
+Main Track
+1st Place
+$3000 Cash
+$50,000 in Gemini API Credits
+AIE Europe Tickets for the whole team
+30-minute virtual call with Google’s AIFF Founders
+30-minute exclusive one-on-one with one of the key researchers behind MiniMax M2
+Free MiniMax API Access for 2 Weeks
+$5000 in Atlas Credits
+$3000 in Brave Search API Credits
+2nd Place
+$2000 Cash
+$30,000 in Gemini API Credits
+2 AIE Europe Tickets
+Free MiniMax API Access for 2 Weeks
+$500 in Atlas Credits
+$2000 in Brave Search API Credits
+3rd Place
+$1000 Cash
+$20,000 in Gemini API Credits
+1 AIE Europe Ticket
+Free MiniMax API Access for 2 Weeks
+$500 in Atlas Credits
+$1000 in Brave Search API Credits
+Best Use of Nano Banana Pro Track
+Winners for this prize track will be chosen by the Google Deepmind team.
+1st Place
+$25,000 in Gemini API Credits
+2nd Place
+$15,000 in Gemini API Credits
+3rd Place
+$10,000 in Gemini API Credits
+❓If you have any questions, please email wania@cerebralvalley.ai or message on Discord.
+
+Welcome to the official AI Engineer Code Agents Hackathon! In partnership with Google Deepmind, this will be the first official hackathon featuring Gemini 3.
+
+Come work on some of the most pressing agent problems, including codebase context optimization & context engineering, reasoning & code generation RL, and collaborative code generation tooling.
+
+The Deepmind team will be on site answering questions about Gemini 3 and giving out credits for their new models.
+
+Judges include Swyx (AIE & Latent Space Podcast), Thomas Joshi (DSPy), Paige Bailey (Deepmind), Dominik Kundel (OpenAI), Benjamin Flast (MongoDB), Arman Hezarkhani (Tenex), and more!
+
+Winners will receive $6,000+ in cash prizes, $150K in Gemini credits, tickets to AI Engineer Europe and more!
+*********************************************************
+
+*Output**: first and foremost, can you give me a list of steps of your plan, in the order of what is to be build, then second, etc, a step can be either a particular UI/UX design, or it can be a particular key feature, or can be anything, as long as you think it is one of the steps to complete this project. Remember for the entire process of this project, when you complete every step, pause first, let’s review/test together, then proceed to the next one, is that ok? Thank you so much

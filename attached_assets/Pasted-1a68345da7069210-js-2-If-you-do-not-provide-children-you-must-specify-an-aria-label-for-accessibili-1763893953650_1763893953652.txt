@@ -1,0 +1,54 @@
+1a68345da7069210.js:2 If you do not provide children, you must specify an aria-label for accessibility
+(anonymous) @ 1a68345da7069210.js:2
+y @ 49f56f1c16c9186c.js:2
+v @ 49f56f1c16c9186c.js:2
+(anonymous) @ 49f56f1c16c9186c.js:2
+am @ ed1e693c96a75807.js:2
+us @ ed1e693c96a75807.js:2
+o @ ed1e693c96a75807.js:2
+iV @ ed1e693c96a75807.js:2
+iU @ ed1e693c96a75807.js:2
+i_ @ ed1e693c96a75807.js:2
+C @ ed1e693c96a75807.js:2
+M @ ed1e693c96a75807.js:2Understand this warning
+1a68345da7069210.js:2 If you do not provide children, you must specify an aria-label for accessibility
+(anonymous) @ 1a68345da7069210.js:2Understand this warning
+ingest.app.coframe.com/ingest/v2/batched_monitoring/68c9ad4d4cddb58cf3a1f93d/:1  Failed to load resource: the server responded with a status of 403 ()Understand this error
+ed1e693c96a75807.js:2 Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+z @ ed1e693c96a75807.js:2Understand this error
+workspace_iframe.html?initialPath=%2F&id=%3Arm9%3A:32 Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.Understand this error
+workspace_iframe.html?initialPath=%2F&id=%3Arm9%3A:32 Unrecognized feature: 'ambient-light-sensor'.Understand this warning
+workspace_iframe.html?initialPath=%2F&id=%3Arm9%3A:32 Unrecognized feature: 'battery'.Understand this warning
+workspace_iframe.html?initialPath=%2F&id=%3Arm9%3A:32 Unrecognized feature: 'execution-while-not-rendered'.Understand this warning
+workspace_iframe.html?initialPath=%2F&id=%3Arm9%3A:32 Unrecognized feature: 'execution-while-out-of-viewport'.Understand this warning
+workspace_iframe.html?initialPath=%2F&id=%3Arm9%3A:32 Unrecognized feature: 'layout-animations'.Understand this warning
+workspace_iframe.html?initialPath=%2F&id=%3Arm9%3A:32 Unrecognized feature: 'legacy-image-formats'.Understand this warning
+workspace_iframe.html?initialPath=%2F&id=%3Arm9%3A:32 Unrecognized feature: 'navigation-override'.Understand this warning
+workspace_iframe.html?initialPath=%2F&id=%3Arm9%3A:32 Unrecognized feature: 'oversized-images'.Understand this warning
+workspace_iframe.html?initialPath=%2F&id=%3Arm9%3A:32 Unrecognized feature: 'publickey-credentials'.Understand this warning
+workspace_iframe.html?initialPath=%2F&id=%3Arm9%3A:32 Unrecognized feature: 'speaker-selection'.Understand this warning
+workspace_iframe.html?initialPath=%2F&id=%3Arm9%3A:32 Unrecognized feature: 'unoptimized-images'.Understand this warning
+workspace_iframe.html?initialPath=%2F&id=%3Arm9%3A:32 Unrecognized feature: 'unsized-media'.Understand this warning
+workspace_iframe.html?initialPath=%2F&id=%3Arm9%3A:32 Allow attribute will take precedence over 'allowfullscreen'.Understand this warning
+workspace_iframe.html?initialPath=%2F&id=%3Arm9%3A:32 Allow attribute will take precedence over 'allowpaymentrequest'.Understand this warning
+61a68345da7069210.js:2 If you do not provide children, you must specify an aria-label for accessibility
+(anonymous) @ 1a68345da7069210.js:2Understand this warning
+workspace_iframe.html?initialPath=%2F&id=%3Arm9%3A:32 Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.Understand this error
+3injected.js:37 Speech Recognition supported!
+injected.js:37 Requesting microphone access...
+injected.js:37 Microphone access granted
+injected.js:37 Starting recognition...
+injected.js:37 Recognition started
+injected.js:37 🎉 GOT SPEECH! Recognition result event: 1
+injected.js:37 Interim result: test
+injected.js:37 Display transcript: test
+injected.js:37 🎉 GOT SPEECH! Recognition result event: 1
+injected.js:37 Final result: test
+injected.js:37 Display transcript: test
+injected.js:37 Accumulated final transcript: test
+injected.js:37 User stopped recording
+injected.js:37 Recognition ended
+injected.js:37 Final transcript: test
+injected.js:37 Stopped by user: true
+injected.js:37 Sending transcript to parent: test
+injected.js:37 Speech Recognition supported!
